@@ -1,18 +1,31 @@
+
+
 import Plotly from 'plotly.js-dist';
 
-let tracel = {
-  x: ['2020-10-04', '2021-11-04', '2023-12-04'],
-  y: [90, 40, 60],
-  type: 'scatter'
+// Example: y = x^2 and y = sin(x)
+const x = Array.from(
+  {length: 100},
+  (_, i) => -5 + i * 0.1
+);
+
+const trace1 = {
+  x: x,
+  y: x.map(v => v*v),
+  mode: 'lines',
+  name: 'y = x^2'
 };
 
-let data = [tracel];
-
-let layout = {
-  title: {
-    text: 'Scroll and Zoom'
-  },
-  showlegend: false
+const trace2 = {
+  x: x,
+  y: x.map(v => Math.sin(v)),
+  mode: 'line',
+  name: 'y = sin(x)'
 };
 
-Plotly.newPlot('tester', data, layout, {scrollZoom: true});
+const layout = {
+  titile: "Graphing Curves with Plotly.js",
+  xaxis: {title: 'x'},
+  yaxis: { title: 'y'}
+};
+
+Plotly.newPlot('tester', [trace1, trace2], layout);
